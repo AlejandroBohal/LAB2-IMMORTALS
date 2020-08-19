@@ -38,6 +38,9 @@ Productor
 ![](https://cdn.discordapp.com/attachments/352624122301513730/745742053891375224/unknown.png)
 
 Probando con un limite pequeño para el stock del productor:
+
 ![](https://cdn.discordapp.com/attachments/352624122301513730/745743286358245406/unknown.png)
+
 Resultado Cpu (no se presentaron errores.)
+
 ![](https://cdn.discordapp.com/attachments/352624122301513730/745743363432775690/unknown.png)
