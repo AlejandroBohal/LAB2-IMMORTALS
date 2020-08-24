@@ -3,27 +3,21 @@ package edu.eci.arsw.highlandersim;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Immortal extends Thread {
 
     private ImmortalUpdateReportCallback updateCallback = null;
-
     private AtomicInteger health;
-
     private int defaultDamageValue;
-
     private final CopyOnWriteArrayList<Immortal> immortalsPopulation;
-
     private final String name;
-
     private final Random r = new Random(System.currentTimeMillis());
-
     private boolean running;
-
     private long id;
+    private AtomicBoolean alive = new AtomicBoolean(true);
 
-    private boolean alive = false;
     public Immortal(String name,long id, CopyOnWriteArrayList<Immortal> immortalsPopulation, AtomicInteger health, int defaultDamageValue, ImmortalUpdateReportCallback ucb) {
         super(name);
         this.updateCallback = ucb;
@@ -33,12 +27,11 @@ public class Immortal extends Thread {
         this.defaultDamageValue = defaultDamageValue;
         this.running = true;
         this.id = id;
-        this.alive = true;
     }
 
     public void run() {
 
-        while (alive) {
+        while (alive.get()) {
             while (!running) {
                 synchronized (this) {
                     try {
@@ -66,6 +59,7 @@ public class Immortal extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
     }
     public void fightSync(Immortal i2){
@@ -117,12 +111,11 @@ public class Immortal extends Thread {
         this.running = running;
     }
     public void kill(){
-
         immortalsPopulation.remove(this);
-        this.alive = false;
+        this.alive.getAndSet(false);
     }
     public void setAlive(boolean alive){
-        this.alive = alive;
+        this.alive.getAndSet(alive);
     }
     @Override
     public long getId() {

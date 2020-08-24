@@ -134,6 +134,7 @@ public class ControlFrame extends JFrame {
                 for (Immortal im : immortals) {
                     im.setAlive(false);
                 }
+
             }
         });
         btnStop.setForeground(Color.RED);

@@ -1,0 +1,8 @@
+It is necessary to suppress the immortal dead of the simulation as they die. 
+Analyzing the simulation operation scheme, could this create a race condition? 
+
+Podría haber condición de carrera de modificación ya que mientras que
+los hilos que siguen vivos se sincronizan, aquellos que están
+muertos no necesitan sincronización ni operaciones adicionales,
+por tal motivo se decidió eliminar aquellos que mueran a medida
+suceda.

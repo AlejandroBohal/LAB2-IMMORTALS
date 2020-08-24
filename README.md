@@ -2,6 +2,42 @@ IMMORTALS
 
 # LAB2 - JAVA IMMORTALS
 
+### Descripción
+
+En este repositorio se encontrará la solución al laboratiorio 2 de ARSW,
+encontraremos un proyecto maven con la solución. A continuación se darán
+las instrucciones de instalación y las respuestas a los ejercicios.
+
+### Pre requisitos
+
+Para correr el proyecto debe tener instalados los siguientes programas
+en su computador:
+
+- Java SE Development Kit 8
+- Java SE Runtime Environment 8
+- Maven para poder construir el proyecto.
+- Git para clonar el repositorio. 
+
+### Instrucciones de instalación
+
+Desde la terminal ejecutar los siguientes comandos:
+```
+ git clone https://github.com/AlejandroBohal/LAB2-IMMORTALS
+ cd LAB2-IMMORTALS
+```
+compilar el proyecto con el siguiente comando:
+```
+ mvn package
+```
+Para correr la solución del problema productor consumidor:
+```
+mvn exec:java -Dexec.mainClass="edu.eci.arst.concprg.prodcons.StartProduction"
+```
+Para correr la solución al problema immortals:
+```
+mvn exec:java -Dexec.mainClass="edu.eci.arsw.highlandersim.ControlFrame";
+```
+
 
 ### Part I - Before finishing class
 
@@ -44,3 +80,38 @@ Probando con un limite pequeño para el stock del productor:
 Resultado Cpu (no se presentaron errores.)
 
 ![](https://cdn.discordapp.com/attachments/352624122301513730/745743363432775690/unknown.png)
+
+### Part 2 - Synchronization and Dead-Locks.
+
+For this case, for N players, what should this value be?
+
+En cualquier caso, el valor total de la vida debería ser igual a
+N*100, siendo N el numero de jugadores y 100 la vida base que
+se asigna al principio a cada uno.
+
+Run the application and verify how the ‘pause and check’ option works. Is the invariant fulfilled?
+
+La invariante no se esta cumpliendo ya que el acceso a la 
+variable de la vida no se esta sincronizando o sus operaciones
+no son atómicas, esto genera una condición de carrera de tipo
+read-modify-write, y se podría solucionar sincronizando el acceso
+o utilizando un AtomicInteger.
+
+Check the operation again (click the button many times). Is the invariant fulfilled or not ?.
+
+La invariante se esta cumpliendo una vez implementada la solución
+propuesta en la pregunta anterior.
+
+It is necessary to suppress the immortal dead of the simulation as they die. 
+Analyzing the simulation operation scheme, could this create a race condition? 
+
+Podría haber condición de carrera de modificación ya que mientras que
+los hilos que siguen vivos se sincronizan, aquellos que están
+muertos no necesitan sincronización ni operaciones adicionales,
+por tal motivo se decidió eliminar aquellos que mueran a medida
+suceda.
+
+### Ejemplo con 100 hilos
+
+![](https://cdn.discordapp.com/attachments/352624122301513730/747263600682467408/unknown.png)
+
