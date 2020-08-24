@@ -85,9 +85,13 @@ public class Immortal extends Thread {
         if (i2.getHealth().get() > 0 && this.getHealth().get()>0) {
             i2.getHealth().getAndAdd(-defaultDamageValue);
             health.getAndAdd(defaultDamageValue);
-            updateCallback.processReport("Fight: " + this + " vs " + i2 + "\n");
+            if (updateCallback != null){
+                updateCallback.processReport("Fight: " + this + " vs " + i2 + "\n");
+            }
         } else {
-            updateCallback.processReport(this + " says:" + i2 + " is already dead!\n");
+            if (updateCallback != null) {
+                updateCallback.processReport(this + " says:" + i2 + " is already dead!\n");
+            }
         }
 
     }
