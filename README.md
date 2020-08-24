@@ -1,4 +1,3 @@
-IMMORTALS
 
 # LAB2 - JAVA IMMORTALS
 
@@ -36,6 +35,12 @@ mvn exec:java -Dexec.mainClass="edu.eci.arst.concprg.prodcons.StartProduction"
 Para correr la solución al problema immortals:
 ```
 mvn exec:java -Dexec.mainClass="edu.eci.arsw.highlandersim.ControlFrame";
+```
+### Pruebas
+
+Para correr las pruebas usar el siguiente comando.
+```
+mvn test;
 ```
 
 
